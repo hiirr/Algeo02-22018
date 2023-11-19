@@ -13,12 +13,14 @@
         <div class="container">
             <form method="POST" enctype="multipart/form-data" action="{% url 'upload_search' %}">
                 {% csrf_token %}
-                <label for="uploadSearch">Masukkan Gambar</label>
+                <label for="uploadSearch" id="upload-search">Masukkan Gambar</label>
                 <input type="file" id="uploadSearch" style="display: none;" name="file"/>
+                <input type="submit" value="Upload"/>
+                <div id="image-search">
                 {% if search_image %}
                     <img src="{{ search_image.image }}" id="search">
                 {% endif %}
-                <input type="submit" value="Upload"/>
+                </div>
             </form>
         </div>
         <div class="container">

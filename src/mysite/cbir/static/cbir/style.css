@@ -1,7 +1,6 @@
 body {
     font-family: Monaco, sans-serif;
-    background-image: url('1180246.jpg'); /* Ganti 'background-image.jpg' dengan gambar latar belakang Anda */
-    background-size: cover;
+    background-color: #ccc;
 }
 
 h1 {
@@ -17,7 +16,10 @@ h1 {
     border-radius: 10px;
 }
 
-
+#image-search {
+    max-width: 200px;
+    max-height: 200px;
+}
 
 #searchType {
     display: inline-block;

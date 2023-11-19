@@ -60,8 +60,9 @@ Contributors:
 
 ## Screenshots
 ### TemuKangenUnch Theme
-![image]()
-![image]()<br><br>
+![image](img/Tampilan_Awal.png)
+![image](img/coba_tekstur.png)
+![image](img/coba_warna.png)<br><br>
 
 ## Acknowledgements
 - Bandung Institute of Technology, Informatics Engineering
