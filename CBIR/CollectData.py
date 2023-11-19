@@ -1,8 +1,8 @@
 import os
 import cv2
 import time
-from Texture import process_chedec
-from Colour import rgb_to_hsv
+from CBIR_Texture import process_chedec
+from CBIR_Colour import rgb_to_hsv
 
 start = time.time()
 

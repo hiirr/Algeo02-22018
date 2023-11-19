@@ -2,8 +2,8 @@ import os
 import cv2
 import concurrent.futures
 import time
-from Texture import process_chedec
-from Texture import compare
+from CBIR_Colour import rgb_to_hsv
+from CBIR_Colour import cosine_similarity_block
 
 start = time.time()
 
@@ -19,24 +19,24 @@ def read_images_from_folder_parallel(folder_path):
     with concurrent.futures.ThreadPoolExecutor() as executor:
         images = list(executor.map(read_image, img_paths))
 
-    return img_paths,images
+    return (img_paths, images)
 
 def sort_path_cos(paths, images):
+        print(paths)
         v = []
         for image in images:
-            processed_image = process_chedec(image)
+            processed_image = rgb_to_hsv(image)
             v.append(processed_image)
         print(v)
-
+        
         cos = []
         path_cos = []
         for i in range(0, len(v)):
-            cos.append(compare(v[0], v[i]))
+            cos.append(cosine_similarity_block(v[20], v[i], 10, 4)*100)
             path_cos.append([paths[i], cos[i]])
-        
+
         #urut sesuai similarity terbesar
         path_cos.sort(key=lambda x: x[1], reverse=True)
-        print(path_cos)
         path_sort = [item[0] for item in path_cos]
         cos_sort = [item[1] for item in path_cos]
 
@@ -49,7 +49,6 @@ if __name__ == "__main__":
         paths, images = read_images_from_folder_parallel(folder_path)
 
         path_sort, cos_sort = sort_path_cos(paths, images)
-
         print(path_sort)
         print(cos_sort)
 
