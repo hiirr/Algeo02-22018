@@ -14,26 +14,26 @@ def read_image(img_path):
 def read_images_from_folder_parallel(folder_path):
     images = []
     img_paths = [os.path.join(folder_path, filename) for filename in os.listdir(folder_path)
-                 if filename.endswith(('.jpg', '.jpeg', '.png', '.gif'))]
+                 if filename.endswith(('.jpg', '.jpeg', '.png'))]
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        # Use executor.map to apply read_image to each image path in parallel
         images = list(executor.map(read_image, img_paths))
 
     return (img_paths, images)
 
 def sort_path_cos(paths, images):
+        print(paths)
         v = []
         for image in images:
             processed_image = rgb_to_hsv(image)
             v.append(processed_image)
+        print(v)
         
         cos = []
         path_cos = []
         for i in range(0, len(v)):
-            cos.append(cosine_similarity_block(v[0], v[i], 10, 4)*100)
+            cos.append(cosine_similarity_block(v[20], v[i], 10, 4)*100)
             path_cos.append([paths[i], cos[i]])
-        print(path_cos)
 
         #urut sesuai similarity terbesar
         path_cos.sort(key=lambda x: x[1], reverse=True)
@@ -43,13 +43,14 @@ def sort_path_cos(paths, images):
         return path_sort, cos_sort
 
 if __name__ == "__main__":
-    folder_path = os.path.abspath("testing")
+    folder_path = os.path.abspath("mysite/cbir/img")
     
     if os.path.exists(folder_path):
-        # Read images from the folder in parallel
         paths, images = read_images_from_folder_parallel(folder_path)
 
         path_sort, cos_sort = sort_path_cos(paths, images)
+        print(path_sort)
+        print(cos_sort)
 
     else:
         print(f"The folder '{folder_path}' does not exist.")

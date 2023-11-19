@@ -1,11 +1,4 @@
-# import cv2
 import numpy as np
-import time
-
-start_time = time.time()
-
-# img1 = cv2.imread(r'/Users/azulsuhada/Documents/Algeo02-22018/IMG_4003.jpg')
-# img2 = cv2.imread(r'/Users/azulsuhada/Documents/Algeo02-22018/IMG_4004.jpg')
 
 def max(a, b):
     return np.maximum(a, b)
@@ -111,15 +104,4 @@ def cosine_similarity_block(mat1, mat2, bins, size):
                 break
 
     average_similarity = sum_similarity / step
-    # print(average_similarity)
     return average_similarity
-
-
-# vec1 = rgb_to_hsv(img1)
-# vec2 = rgb_to_hsv(img2)
-
-# similarity = cosine_similarity_block(vec1, vec2, 10, 4) * 100
-# print("Persentase Kemiripan: {:.2f}%".format(similarity))
-
-end_time = time.time() - start_time
-# print("Time: {:.2f} ms".format(end_time * 1000))

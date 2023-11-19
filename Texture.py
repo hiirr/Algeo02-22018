@@ -1,12 +1,10 @@
 import numpy as np
-import matplotlib.pyplot as plt
-import time
 
 def to_gray(img):
     r, g, b = img[..., 0], img[..., 1], img[..., 2]
     return 0.299 * r + 0.587 * g + 0.114 * b
 
-def process_hce(image):
+def process_chedec(image):
     gray_img = to_gray(image)
 
     c = np.zeros((256, 256), dtype=np.uint32)
@@ -48,22 +46,14 @@ def process_hce(image):
     diff = [contrast, homogeneity, entropy, dissimilarity, energy, correlation]
     return diff
 
-def compare(hce1, hce2):
-    numerator = np.dot(hce1, hce2)
-    denominator = np.linalg.norm(hce1) * np.linalg.norm(hce2)
+def compare(chedec1, chedec2):
+    numerator = np.dot(chedec1, chedec2)
+    denominator = np.linalg.norm(chedec1) * np.linalg.norm(chedec2)
     similarity = (numerator / denominator)*100
     return similarity
 
 def cbir_texture(img1, img2):
-    hce1 = process_hce(img1)
-    hce2 = process_hce(img2)
-    similarity = compare(hce1, hce2)
+    chedec1 = process_chedec(img1)
+    chedec2 = process_chedec(img2)
+    similarity = compare(chedec1, chedec2)
     return similarity
-
-start = time.time()
-image1 = plt.imread(r"D:\hirs\Tubes2Algeo\dataset\0.jpg")
-image2 = plt.imread(r"D:\hirs\Tubes2Algeo\testing\12.jpg")
-
-print(cbir_texture(image1, image2))
-end = time.time()
-print(end - start)
